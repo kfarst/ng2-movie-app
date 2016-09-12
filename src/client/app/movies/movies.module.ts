@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
-import { MovieListComponent } from './movie-list.component';
-import { MovieDetailComponent } from './movie-detail.component';
-import { MovieListService } from '../shared/movies/index';
+import { MovieService } from '../shared/movies/index';
+
+import {
+  MovieListComponent,
+  MovieDetailComponent,
+  MovieCardComponent,
+  GenreListPipe
+} from './index';
 
 @NgModule({
   imports: [CommonModule, SharedModule],
-  declarations: [MovieListComponent, MovieDetailComponent],
-  exports: [MovieDetailComponent, MovieDetailComponent],
-  providers: [MovieListService]
+  declarations: [MovieListComponent, MovieDetailComponent, MovieCardComponent, GenreListPipe],
+  exports: [MovieDetailComponent, MovieDetailComponent, MovieCardComponent, GenreListPipe],
+  providers: [MovieService]
 })
 export class MoviesModule { }

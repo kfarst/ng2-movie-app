@@ -1,4 +1,4 @@
 /**
- * This barrel file provides the export for the shared MovieListService.
+ * This barrel file provides the export for the shared MovieService.
  */
-export * from './movie-list.service';
+export * from './movie.service';

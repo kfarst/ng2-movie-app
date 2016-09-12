@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
-import { MovieListService, Movie } from '../shared/index';
+import { MovieService, GenreService, Movie, Genre } from '../shared/index';
+import { MovieCardComponent } from './index';
 
 /**
- * This class represents the lazy loaded MovieListComponent.
+ * This class represents the lazy loaded MovieComponent.
  */
 @Component({
   moduleId: module.id,
@@ -15,18 +16,25 @@ import { MovieListService, Movie } from '../shared/index';
 
 export class MovieListComponent implements OnInit {
 
+  @ViewChildren(MovieCardComponent) movieCardComponents: QueryList<MovieCardComponent>;
+
   listType: string;
   errorMessage: string;
   movies: Movie[] = [];
+  genres: Genre[] = [];
   sub: Subscription;
 
   /**
    * Creates an instance of the MovieListComponent with the injected
-   * MovieListService.
+   * MovieService.
    *
-   * @param {MovieListService} movieListService - The injected MovieListService.
+   * @param {MovieService} movieService - The injected MovieService.
    */
-  constructor(private movieListService: MovieListService, private route: ActivatedRoute) {}
+  constructor(
+    private movieService: MovieService,
+    private genreService: GenreService,
+    private route: ActivatedRoute
+  ) {}
 
   /**
    * Get the movies OnInit
@@ -41,13 +49,21 @@ export class MovieListComponent implements OnInit {
   }
 
   /**
-   * Handle the movieListService observable
+   * Handle the movieService observable
    */
   getMovies() {
-    this.movieListService.get(this.listType.replace('-', '_'))
-		     .subscribe(
-		       movies => this.movies = movies,
-		       error =>  this.errorMessage = <any>error
-		       );
+    this.genreService.get()
+    .subscribe(
+      genres => {
+        this.genres = genres;
+
+        this.movieService.get(this.listType.replace('-', '_'))
+        .subscribe(
+          movies => this.movies = movies,
+            error =>  this.errorMessage = <any>error
+        );
+      },
+      error =>  this.errorMessage = <any>error
+    );
   }
 }

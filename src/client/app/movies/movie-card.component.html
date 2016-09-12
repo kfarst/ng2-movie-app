@@ -1,0 +1,23 @@
+<div class="row movie--card">
+  <div class="col-md-9" [ngClass]="isEven ? 'pull-left' : 'pull-right'">
+    <h1>{{ movie.title }}</h1>
+
+    <hr />
+
+    <div class="row add-smaller-space-below">
+      <div class="col-md-12"><i class="fa fa-lrg fa-calendar"></i> {{ movie.release_date }}</div>
+    </div>
+    <div class="row add-smaller-space-below">
+      <div class="col-md-12"><i class="fa fa-lrg" [ngClass]="{ 'fa-thumbs-up green': movie.vote_average >= 5, 'fa-thumbs-down red': movie.vote_average < 5 }"></i> {{ movie.vote_average }}</div>
+    </div>
+    <div class="row add-space-below">
+      <div class="col-md-12">{{ movie.genre_ids | genreList: genres }}</div>
+    </div>
+
+    <p>{{ movie.overview }}</p>
+  </div>
+
+  <div class="col-md-3 no-padding-left" [ngClass]="isEven ? 'pull-right' : 'pull-left'">
+    <img width="100%" [src]="getImageUrl(movie.poster_path)" />
+  </div>
+</div>

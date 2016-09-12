@@ -1,0 +1,27 @@
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css';
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.add-space-below {
+  margin-bottom: 30px;
+}
+
+.add-smaller-space-below {
+  margin-bottom: 10px;
+}

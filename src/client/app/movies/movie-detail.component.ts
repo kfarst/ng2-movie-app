@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MovieListService } from '../shared/index';
+import { MovieService } from '../shared/index';
 
 @Component({
   moduleId: module.id,

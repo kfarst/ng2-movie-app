@@ -1,8 +1,10 @@
 :host {
-  background-color: #106cc8;
+  position: relative;
+  background: #455A64 url("./assets/reel.png") no-repeat left top;
+  background-size: contain;
   color: rgba(255, 255, 255, 0.87);
   display: block;
-  height: 48px;
+  height: 100px;
   padding: 0 16px;
 }
 

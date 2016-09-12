@@ -7,8 +7,6 @@ import * as serveStatic from 'serve-static';
 import * as codeChangeTool from './code_change_tools';
 import Config from '../../config';
 
-import * as proxy from 'http-proxy-middleware';
-
 /**
  * Serves the Single Page Application. More specifically, calls the `listen` method, which itself launches BrowserSync.
  */
@@ -37,11 +35,6 @@ export function serveDocs() {
     serveStatic(resolve(process.cwd(), Config.DOCS_DEST))
   );
 
-  server.use(proxy('/api', {
-    target: 'https://api.themoviedb.org/3/movie/',
-    changeOrigin: true
-  }));
-
   server.listen(Config.DOCS_PORT, () =>
     openResource('http://localhost:' + Config.DOCS_PORT + Config.APP_BASE)
   );
@@ -60,11 +53,6 @@ export function serveCoverage() {
     serveStatic(resolve(process.cwd(), 'coverage'))
   );
 
-  server.use(proxy('/api', {
-    target: 'https://api.themoviedb.org/3/movie/',
-    changeOrigin: true
-  }));
-
   server.listen(Config.COVERAGE_PORT, () =>
     openResource('http://localhost:' + Config.COVERAGE_PORT + Config.APP_BASE)
   );
@@ -82,11 +70,6 @@ export function serveProd() {
   server.use(Config.APP_BASE, serveStatic(root));
 
   server.use(fallback('index.html', { root }));
-
-  server.use(proxy('/api', {
-    target: 'https://api.themoviedb.org/3/movie/',
-    changeOrigin: true
-  }));
 
   server.listen(Config.PORT, () =>
     openResource('http://localhost:' + Config.PORT + Config.APP_BASE)

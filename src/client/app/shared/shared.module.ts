@@ -5,7 +5,8 @@ import { RouterModule } from '@angular/router';
 
 import { ToolbarComponent } from './toolbar/index';
 import { NavbarComponent } from './navbar/index';
-import { MovieListService } from './movies/index';
+import { MovieService } from './movies/index';
+import { GenreService } from './genre/index';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -21,7 +22,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [MovieListService]
+      providers: [MovieService, GenreService]
     };
   }
 }

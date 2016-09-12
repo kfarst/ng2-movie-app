@@ -37,7 +37,7 @@ export class ProjectConfig extends SeedConfig {
     /* Add to or override NPM module configurations: */
     this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], {
       middleware: [
-        proxy('/3/movie', {
+        proxy('/3', {
           changeOrigin: true,
           target: 'http://api.themoviedb.org'
         }),
