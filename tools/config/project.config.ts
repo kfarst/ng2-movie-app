@@ -1,3 +1,6 @@
+const proxy = require('http-proxy-middleware');
+const urlRewrite = require('connect-history-api-fallback');
+
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
@@ -32,7 +35,15 @@ export class ProjectConfig extends SeedConfig {
     ];
 
     /* Add to or override NPM module configurations: */
-    // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
+    this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], {
+      middleware: [
+        proxy('/3/movie', {
+          changeOrigin: true,
+          target: 'http://api.themoviedb.org'
+        }),
+        urlRewrite({index: `${this.APP_BASE}index.html`})
+      ]
+    });
   }
 
 }

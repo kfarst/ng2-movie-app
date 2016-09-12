@@ -4,14 +4,33 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+export interface Movie {
+  id: number;
+  title: string;
+  release_date: string;
+  overview: string;
+  backdrop_path: string;
+  poster_path: string;
+  imdb_id: string;
+  vote_average: number;
+  status: string;
+  tagline: string;
+  budget: number;
+  revenue: number;
+  runtime: number;
+  genres: any[];
+  production_companies: any[];
+}
+
 /**
  * This class provides the NameList service with methods to read names and add names.
  */
 @Injectable()
-export class NameListService {
+export class MovieListService {
+  private static API_KEY: string = "your key here";
 
   /**
-   * Creates a new NameListService with the injected Http.
+   * Creates a new MovieListService with the injected Http.
    * @param {Http} http - The injected Http.
    * @constructor
    */
@@ -21,9 +40,9 @@ export class NameListService {
    * Returns an Observable for the HTTP GET request for the JSON resource.
    * @return {string[]} The Observable for the HTTP request.
    */
-  get(): Observable<string[]> {
-    return this.http.get('/assets/data.json')
-                    .map((res: Response) => res.json())
+  get(endpoint: string|number): Observable<Movie[]> {
+    return this.http.get(`/3/movie/${endpoint}?api_key=${MovieListService.API_KEY}`)
+                    .map((res: Response) => res.json().results)
                     .catch(this.handleError);
   }
 

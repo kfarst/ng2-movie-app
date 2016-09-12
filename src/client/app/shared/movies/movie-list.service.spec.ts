@@ -3,18 +3,18 @@ import { BaseRequestOptions, ConnectionBackend, Http, Response, ResponseOptions 
 import { MockBackend } from '@angular/http/testing';
 import { Observable } from 'rxjs/Observable';
 
-import { NameListService } from './name-list.service';
+import { MovieListService } from './movie-list.service';
 
 export function main() {
   describe('NameList Service', () => {
-    let nameListService: NameListService;
+    let movieListService: MovieListService;
     let backend: MockBackend;
     let initialResponse: any;
 
     beforeEach(() => {
 
       let injector = ReflectiveInjector.resolveAndCreate([
-        NameListService,
+        MovieListService,
         BaseRequestOptions,
         MockBackend,
         {provide: Http,
@@ -24,12 +24,12 @@ export function main() {
           deps: [MockBackend, BaseRequestOptions]
         },
       ]);
-      nameListService = injector.get(NameListService);
+      movieListService = injector.get(MovieListService);
       backend = injector.get(MockBackend);
 
       let connection: any;
       backend.connections.subscribe((c: any) => connection = c);
-      initialResponse = nameListService.get();
+      initialResponse = movieListService.get();
       connection.mockRespond(new Response(new ResponseOptions({ body: '["Dijkstra", "Hopper"]' })));
     });
 
