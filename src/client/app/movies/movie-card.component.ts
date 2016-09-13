@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Movie, Genre } from '../shared/index';
 
 /**
@@ -12,9 +12,12 @@ import { Movie, Genre } from '../shared/index';
 })
 
 export class MovieCardComponent {
+  isFavorited: boolean = false;
+
   @Input() movie: Movie;
   @Input() genres: Genre[];
   @Input() isEven: boolean;
+  @Output() toggleAsFavorite = new EventEmitter<Movie>();
 
   getImageUrl (fileName: string): string {
     return `https://image.tmdb.org/t/p/w1280${fileName}`;

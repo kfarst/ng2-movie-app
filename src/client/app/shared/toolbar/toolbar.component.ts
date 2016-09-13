@@ -1,4 +1,6 @@
-import { Component} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FavoritesService } from '../favorites/index';
+import { Subscription } from 'rxjs/Subscription';
 
 /**
  * This class represents the toolbar component.
@@ -10,5 +12,19 @@ import { Component} from '@angular/core';
   styleUrls: ['toolbar.component.css']
 })
 
-export class ToolbarComponent {}
+export class ToolbarComponent implements OnInit, OnDestroy {
+  sub: Subscription;
+  favoritesCount: number = 0;
+
+  constructor(private favoritesService: FavoritesService) { }
+
+  ngOnInit() {
+    this.sub = this.favoritesService.
+      subscribe(favoritesCount => this.favoritesCount = favoritesCount);
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+}
 

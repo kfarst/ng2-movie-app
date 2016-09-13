@@ -7,6 +7,7 @@ import { ToolbarComponent } from './toolbar/index';
 import { NavbarComponent } from './navbar/index';
 import { MovieService } from './movies/index';
 import { GenreService } from './genre/index';
+import { FavoritesService } from './favorites/index';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -22,7 +23,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [MovieService, GenreService]
+      providers: [MovieService, GenreService, FavoritesService]
     };
   }
 }

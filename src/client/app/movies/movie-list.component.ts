@@ -1,8 +1,23 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription, Observable } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
-import { MovieService, GenreService, Movie, Genre } from '../shared/index';
 import { MovieCardComponent } from './index';
+
+import {
+  MovieService,
+  GenreService,
+  FavoritesService,
+  Movie,
+  Genre
+} from '../shared/index';
+
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  QueryList,
+  AfterViewInit,
+  OnDestroy
+} from '@angular/core';
 
 /**
  * This class represents the lazy loaded MovieComponent.
@@ -14,9 +29,9 @@ import { MovieCardComponent } from './index';
   styleUrls: ['movie-list.component.css'],
 })
 
-export class MovieListComponent implements OnInit {
+export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChildren(MovieCardComponent) movieCardComponents: QueryList<MovieCardComponent>;
+  @ViewChildren('movieCard') movieCardComponents: QueryList<MovieCardComponent>;
 
   listType: string;
   errorMessage: string;
@@ -33,8 +48,9 @@ export class MovieListComponent implements OnInit {
   constructor(
     private movieService: MovieService,
     private genreService: GenreService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private favoritesService: FavoritesService
+  ) { }
 
   /**
    * Get the movies OnInit
@@ -46,6 +62,11 @@ export class MovieListComponent implements OnInit {
       this.listType = params['list_type'];
       this.getMovies();
     });
+  }
+
+  ngAfterViewInit() {
+    this.movieCardComponents.notifyOnChanges();
+    this.emitNewFavoriteCount();
   }
 
   /**
@@ -65,5 +86,20 @@ export class MovieListComponent implements OnInit {
       },
       error =>  this.errorMessage = <any>error
     );
+  }
+
+  toggleAsFavorite (movieComponent: MovieCardComponent) {
+    movieComponent.isFavorited = !movieComponent.isFavorited;
+    this.emitNewFavoriteCount();
+  }
+
+  emitNewFavoriteCount(): void {
+    this.favoritesService.emit(
+      this.movieCardComponents.filter(comp => comp.isFavorited).length
+    );
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

@@ -25,3 +25,7 @@ body {
 .add-smaller-space-below {
   margin-bottom: 10px;
 }
+
+.push-slightly-down {
+  margin-top: 10px;
+}

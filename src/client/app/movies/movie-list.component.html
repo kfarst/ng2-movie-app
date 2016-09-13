@@ -1,1 +1,7 @@
-<movie-card *ngFor="let movie of movies" [isEven]="even" [genres]="genres" [movie]="movie"></movie-card>
+<movie-card
+  *ngFor="let movie of movies"
+  (toggleAsFavorite)="toggleAsFavorite(movieCard)"
+  #movieCard
+  [isEven]="even"
+  [genres]="genres"
+  [movie]="movie"></movie-card>
