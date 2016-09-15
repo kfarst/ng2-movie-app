@@ -1,11 +1,7 @@
-.movie--card {
+.newsletter {
   max-width: 75%;
   margin: 30px auto;
   box-shadow: 0 0 10px #C0C0C0;
   font-size: 22px;
   line-height: 28px;
-}
-
-.movie--card--favorite a {
-  font-size: 48px;
 }

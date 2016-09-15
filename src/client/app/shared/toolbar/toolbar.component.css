@@ -5,7 +5,7 @@
   background-size: contain;
   color: rgba(255, 255, 255, 0.87);
   display: block;
-  height: 100px;
+  height: 75px;
   padding: 0 16px;
 }
 
@@ -25,6 +25,11 @@ h1 {
   width: 24px;
 }
 
-.toolbar--favorites {
-  font-size: 28px;
+.toolbar--aux {
+  font-size: 22px;
+}
+
+.toolbar--aux a {
+  text-decoration: none;
+  color: white;
 }

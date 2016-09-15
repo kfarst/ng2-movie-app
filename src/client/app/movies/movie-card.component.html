@@ -1,5 +1,5 @@
 <div class="row movie--card">
-  <div class="col-md-9" [ngClass]="isEven ? 'pull-left' : 'pull-right'">
+  <div class="col-md-8" [ngClass]="isEven ? 'pull-left' : 'pull-right'">
     <div class="row">
       <div class="col-md-10">
         <h1>{{ movie.title }}</h1>
@@ -27,7 +27,7 @@
     <p>{{ movie.overview }}</p>
   </div>
 
-  <div class="col-md-3 no-padding-left" [ngClass]="isEven ? 'pull-right' : 'pull-left'">
+  <div class="col-md-4 no-padding-left" [ngClass]="isEven ? 'pull-right' : 'pull-left'">
     <img width="100%" [src]="getImageUrl(movie.poster_path)" />
   </div>
 </div>

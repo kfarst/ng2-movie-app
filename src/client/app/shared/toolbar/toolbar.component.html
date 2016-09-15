@@ -1,5 +1,9 @@
-<div class="row toolbar--favorites">
-  <div class="col-md-2 pull-right text-right">
+<div class="row toolbar--aux">
+  <div class="col-md-4 pull-right text-right">
+    <a [routerLink]="['/mailing-list']">Mailing List</a>
+     |
+    <a [routerLink]="['/newsletter']">Newsletter</a>
+     |
     <i class="fa fa-lrg fa-star"></i>
     {{ favoritesCount }}
   </div>
