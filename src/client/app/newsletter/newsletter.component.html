@@ -1,5 +1,48 @@
 <div class="row newsletter">
   <div class="col-md-12">
     <h1>Get our newsletter</h1>
+
+    <form [formGroup]="registerForm" (submit)="destroyFormValues()" novalidate>
+      <div class="form-group">
+        <label>First name:</label>
+        <input type="text" class="form-control" formControlName="firstName">
+        <p class="text-danger" *ngIf="registerForm.controls.firstName.dirty && registerForm.controls.firstName.errors">This field is required!</p>
+        <pre>{{ registerForm.controls.firstName.errors | json }}</pre>
+      </div>
+
+      <div class="form-group">
+        <label>Last name:</label>
+        <input type="text" class="form-control" formControlName="lastName">
+        <p class="text-danger" *ngIf="registerForm.controls.lastName.dirty && registerForm.controls.lastName.errors">This field is required!</p>
+      </div>
+
+      <div class="form-group">
+        <label>Email address:</label>
+        <input type="email" class="form-control" validateEmail formControlName="emailAddress">
+        <pre>{{ registerForm.controls.emailAddress.errors | json }}</pre>
+      </div>
+
+      <fieldset formGroupName="address">
+        <div class="form-group">
+          <label>Street:</label>
+          <input type="text" class="form-control" formControlName="street">
+          <p class="text-danger" *ngIf="registerForm.controls.address.controls.street.dirty && registerForm.controls.address.controls.street.errors">This field is required!</p>
+        </div>
+
+        <div class="form-group">
+          <label>Zip:</label>
+          <input type="text" class="form-control" formControlName="zip">
+          <p class="text-danger" *ngIf="registerForm.controls.address.controls.zip.dirty && registerForm.controls.address.controls.zip.errors">This field is required!</p>
+        </div>
+
+        <div class="form-group">
+          <label>City:</label>
+          <input type="text" class="form-control" formControlName="city">
+          <p class="text-danger" *ngIf="registerForm.controls.address.controls.city.dirty && registerForm.controls.address.controls.city.errors">This field is required!</p>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="btn btn-default add-smaller-space-below">Submit</button>
+    </form>
   </div>
 </div>
